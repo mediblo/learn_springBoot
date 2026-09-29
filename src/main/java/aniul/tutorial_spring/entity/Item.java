@@ -49,4 +49,21 @@ public class Item {
         this.standard = standard;
         this.alertQuantity = alertQuantity != null ? alertQuantity : 0L;
     }
+
+    public void increaseQuantity(Long amount) {
+        if (amount == null || amount <= 0) {
+            throw new IllegalArgumentException("자재 수량은 최소 1개여야 합니다.");
+        }
+        this.quantity += amount;
+    }
+
+    public void decreaseQuantity(Long amount) {
+        if (amount == null || amount <= 0) {
+            throw new IllegalArgumentException("자재 수량은 최소 1개여야 합니다.");
+        }
+        else if (this.quantity < amount) {
+            throw new IllegalArgumentException("재고가 부족합니다. [ 현 재고 : "+this.quantity+" | 요청 재고 : "+amount);
+        }
+        this.quantity-= amount;
+    }
 }
